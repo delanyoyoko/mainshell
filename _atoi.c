@@ -1,37 +1,37 @@
 #include "simpleShell.h"
 
 /**
- * interactive - returns true if shell is interactive mode
- * @info: struct address
+ * get_interactive - determines whether shell is in interactive mode
+ * @info: a struct address
  *
- * Return: 1 if interactive mode, 0 otherwise
+ * Return: 0 if shell not in interactive mode, or 1 if otherwise
  */
-int interactive(info_t *info)
+int get_interactive(info_t *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
 
 /**
- * is_delim - checks if character is a delimeter
- * @c: the char to check
- * @delim: the delimeter string
- * Return: 1 if true, 0 if false
+ * is_delimitor - checks whether character is a delimetor
+ * @c: the character to check
+ * @delimitor: the delimetor string
+ * Return: 0 if not a delimitor, otherwise 1 for true
  */
-int is_delim(char c, char *delim)
+int is_delimitor(char c, char *delimitor)
 {
-	while (*delim)
-		if (*delim++ == c)
+	while (*delimitor)
+		if (*delimitor++ == c)
 			return (1);
 	return (0);
 }
 
 /**
- * _isalpha - checks for alphabetic character
- * @c: The character to input
- * Return: 1 if c is alphabetic, 0 otherwise
+ * is_alpha - determines an alphabetic character
+ * @c: The character to determine
+ * Return: 0 if character is not alphabetic, 1 otherwise
  */
 
-int _isalpha(int c)
+int is_alpha(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
@@ -40,36 +40,39 @@ int _isalpha(int c)
 }
 
 /**
- * _atoi - converts a string to an integer
+ * _atoi - string to an integer convertion
  * @s: the string to be converted
- * Return: 0 if no numbers in string, converted number otherwise
+ * Return: converted number or 0 if no number in the string
  */
 
 int _atoi(char *s)
 {
-	int i, sign = 1, flag = 0, output;
-	unsigned int result = 0;
+	int idx;
+	int indication = 1;
+	int signal = 0;
+	int outstage;
+	unsigned int res = 0;
 
-	for (i = 0; s[i] != '\0' && flag != 2; i++)
+	for (idx = 0; s[idx] != '\0' && signal != 2; idx++)
 	{
-		if (s[i] == '-')
-			sign *= -1;
+		if (s[idx] == '-')
+			indication *= -1;
 
-		if (s[i] >= '0' && s[i] <= '9')
+		if (s[idx] >= '0' && s[idx] <= '9')
 		{
-			flag = 1;
-			result *= 10;
-			result += (s[i] - '0');
+			signal = 1;
+			res *= 10;
+			res += (s[idx] - '0');
 		}
-		else if (flag == 1)
-			flag = 2;
+		else if (signal == 1)
+			signal = 2;
 	}
 
-	if (sign == -1)
-		output = -result;
+	if (indication == -1)
+		outstage = -res;
 	else
-		output = result;
+		outstage = res;
 
-	return (output);
+	return (outstage);
 }
 
