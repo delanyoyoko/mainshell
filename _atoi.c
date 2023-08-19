@@ -1,4 +1,4 @@
-#include "simpleShell.h"
+#include "mainshell.h"
 
 /**
  * get_interactive - determines whether shell is in interactive mode
@@ -6,7 +6,7 @@
  *
  * Return: 0 if shell not in interactive mode, or 1 if otherwise
  */
-int get_interactive(info_t *info)
+int get_interactive(info_type *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
