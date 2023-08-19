@@ -40,7 +40,7 @@ int is_alpha(int c)
 }
 
 /**
- * _atoi - string to an integer convertion
+ * _atoi - string to an integer convection
  * @s: the string to be converted
  * Return: converted number or 0 if no number in the string
  */
