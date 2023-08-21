@@ -1,86 +1,87 @@
-#include "shell.h"
+#include "mainshell.h"
 
 /**
- * _eputs - prints an input string
- * @str: the string to be printed
+ * puts_error - prints an error input string
+ * @strng: the string to be printed
  *
  * Return: Nothing
  */
-void _eputs(char *str)
+void puts_error(char *strng)
 {
-	int i = 0;
+	int idx = 0;
 
-	if (!str)
+	if (!strng)
 		return;
-	while (str[i] != '\0')
+	while (strng[idx] != '\0')
 	{
-		_eputchar(str[i]);
-		i++;
+		putchar_error(strng[idx]);
+		idx++;
 	}
 }
 
 /**
- * _eputchar - writes the character c to stderr
- * @c: The character to print
+ * putchar_error - writes the character cter to stderr
+ * @cter: The character to print as error
  *
  * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * On error, -1 is returned, and errno is set accordingly.
  */
-int _eputchar(char c)
+int putchar_error(char cter)
 {
-	static int i;
-	static char buf[WRITE_BUF_SIZE];
+	static int idx;
+	static char buffered[WRITE_BUFFER_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (cter == BUFFER_FLUSH || idx >= WRITE_BUFFER_SIZE)
 	{
-		write(2, buf, i);
-		i = 0;
+		write(2, buffered, idx);
+		idx = 0;
 	}
-	if (c != BUF_FLUSH)
-		buf[i++] = c;
+	if (cter != BUFFER_FLUSH)
+		buffered[idx++] = cter;
 	return (1);
 }
 
 /**
- * _putfd - writes the character c to given fd
- * @c: The character to print
- * @fd: The filedescriptor to write to
+ * put_file_dec - writes the character cter to a given
+ * file
+ * @cter: The character to write
+ * @file_dec: file filedescriptor to write to
  *
  * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * On error, -1 is returned, and errno is set accordingly.
  */
-int _putfd(char c, int fd)
+int put_file_dec(char cter, int file_dec)
 {
-	static int i;
-	static char buf[WRITE_BUF_SIZE];
+	static int idx;
+	static char buffered[WRITE_BUFFER_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (cter == BUFFER_FLUSH || idx >= WRITE_BUFFER_SIZE)
 	{
-		write(fd, buf, i);
-		i = 0;
+		write(file_dec, buffered, idx);
+		idx = 0;
 	}
-	if (c != BUF_FLUSH)
-		buf[i++] = c;
+	if (cter != BUFFER_FLUSH)
+		buffered[idx++] = cter;
 	return (1);
 }
 
 /**
- * _putsfd - prints an input string
- * @str: the string to be printed
- * @fd: the filedescriptor to write to
+ * put_files_dec - writes an input string
+ * @strng: the string to be written
+ * @file_dec: file filedescriptor to write to
  *
- * Return: the number of chars put
+ * Return: the number of characters put
  */
-int _putsfd(char *str, int fd)
+int put_files_dec(char *strng, int file_dec)
 {
-	int i = 0;
+	int idx = 0;
 
-	if (!str)
+	if (!strng)
 		return (0);
-	while (*str)
+	while (*strng)
 	{
-		i += _putfd(*str++, fd);
+		idx += put_file_dec(*strng++, file_dec);
 	}
-	return (i);
+	return (idx);
 }
 
