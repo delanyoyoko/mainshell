@@ -2,25 +2,25 @@
 
 /**
  * get_interactive - determines whether shell is in interactive mode
- * @info: a struct address
+ * @infoval: a struct address
  *
  * Return: 0 if shell not in interactive mode, or 1 if otherwise
  */
-int get_interactive(info_type *info)
+int get_interactive(info_type *infoval)
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO) && infoval->readfd <= 2);
 }
 
 /**
- * is_delimitor - checks whether character is a delimetor
+ * is_delimitor - checks whether character is a delimitor
  * @c: the character to check
- * @delimitor: the delimetor string
+ * @delimitor: the delimitor string
  * Return: 0 if not a delimitor, otherwise 1 for true
  */
-int is_delimitor(char c, char *delimitor)
+int is_delimitor(char cter, char *delimitor)
 {
 	while (*delimitor)
-		if (*delimitor++ == c)
+		if (*delimitor++ == cter)
 			return (1);
 	return (0);
 }
@@ -31,9 +31,9 @@ int is_delimitor(char c, char *delimitor)
  * Return: 0 if character is not alphabetic, 1 otherwise
  */
 
-int is_alpha(int c)
+int is_alpha(int cter)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if ((cter >= 'a' && cter <= 'z') || (cter >= 'A' && cter <= 'Z'))
 		return (1);
 	else
 		return (0);
@@ -45,7 +45,7 @@ int is_alpha(int c)
  * Return: converted number or 0 if no number in the string
  */
 
-int _atoi(char *s)
+int _atoi(char *shll)
 {
 	int idx;
 	int indication = 1;
@@ -53,16 +53,16 @@ int _atoi(char *s)
 	int outstage;
 	unsigned int res = 0;
 
-	for (idx = 0; s[idx] != '\0' && signal != 2; idx++)
+	for (idx = 0; shll[idx] != '\0' && signal != 2; idx++)
 	{
-		if (s[idx] == '-')
+		if (shll[idx] == '-')
 			indication *= -1;
 
-		if (s[idx] >= '0' && s[idx] <= '9')
+		if (shll[idx] >= '0' && shll[idx] <= '9')
 		{
 			signal = 1;
 			res *= 10;
-			res += (s[idx] - '0');
+			res += (shll[idx] - '0');
 		}
 		else if (signal == 1)
 			signal = 2;
