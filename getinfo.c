@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "mainshell.h"
 
 /**
  * clear_info - init info_type struct
@@ -50,7 +50,7 @@ void set_info(info_type *infoval, char **arg_vec)
  */
 void free_info(info_type *infoval, int all_fields)
 {
-	ffree(infoval->argv);
+	free_mem(infoval->argv);
 	infoval->argv = NULL;
 	infoval->path = NULL;
 	if (all_fields)
@@ -58,14 +58,14 @@ void free_info(info_type *infoval, int all_fields)
 		if (!infoval->cmd_buf)
 			free(infoval->arg);
 		if (infoval->env)
-			free_list(&(infoval->env));
+			free_mem_list(&(infoval->env));
 		if (infoval->history)
-			free_list(&(infoval->history));
+			free_mem_list(&(infoval->history));
 		if (infoval->alias)
-			free_list(&(infoval->alias));
-		ffree(infoval->environ);
+			free_mem_list(&(infoval->alias));
+		free_mem(infoval->environ);
 			infoval->environ = NULL;
-		bfree((void **)infoval->cmd_buf);
+		free_buffer((void **)infoval->cmd_buf);
 		if (infoval->readfd > 2)
 			close(infoval->readfd);
 		_putchar(BUFFER_FLUSH);
