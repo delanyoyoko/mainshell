@@ -15,7 +15,7 @@
 /* Read/Write to temporarily hold data in buffers */
 #define READ_BUFFER_SIZE 1024
 #define WRITE_BUFFER_SIZE 1024
-#define BUF_FLUSH -1
+#define BUFFER_FLUSH -1
 
 /* for chaining of commands */
 #define CMD_NORM	0
