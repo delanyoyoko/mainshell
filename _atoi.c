@@ -27,7 +27,7 @@ int is_delimitor(char cter, char *delimitor)
 
 /**
  * is_alpha - determines an alphabetic character
- * @c: The character to determine
+ * @cter: The character to determine
  * Return: 0 if character is not alphabetic, 1 otherwise
  */
 
@@ -41,7 +41,7 @@ int is_alpha(int cter)
 
 /**
  * _atoi - string to an integer convection
- * @s: the string to be converted
+ * @shll: the string to be converted
  * Return: converted number or 0 if no number in the string
  */
 
