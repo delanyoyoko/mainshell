@@ -1,94 +1,94 @@
-#include "shell.h"
+#include "mainshell.h"
 
 /**
- * get_environ - returns the string array copy of our environ
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
+ * get_shell_env - returns the string array copy of our environment
+ * @infoval: struct involving arguments. Used to maintain
+ * constant function prototype.
  * Return: Always 0
  */
-char **get_environ(info_t *info)
+char **get_shell_env(info_type *infoval)
 {
-	if (!info->environ || info->env_changed)
+	if (!infoval->environ || infoval->env_changed)
 	{
-		info->environ = list_to_strings(info->env);
-		info->env_changed = 0;
+		infoval->environ = list_stringify(infoval->env);
+		infoval->env_changed = 0;
 	}
 
-	return (info->environ);
+	return (infoval->environ);
 }
 
 /**
- * _unsetenv - Remove an environment variable
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- *  Return: 1 on delete, 0 otherwise
- * @var: the string env var property
+ * unset_shell_env - Removes an environment var
+ * @infoval: struct involving arguments. Used to maintain
+ * constant function prototype.
+ * @varr: the string env var property
+ * Return: 1 on remove, else 0
  */
-int _unsetenv(info_t *info, char *var)
+int unset_shell_env(info_type *infoval, char *varr)
 {
-	list_t *node = info->env;
-	size_t i = 0;
-	char *p;
+	list_t *nodeval = infoval->env;
+	size_t idx = 0;
+	char *ppr;
 
-	if (!node || !var)
+	if (!nodeval || !varr)
 		return (0);
 
-	while (node)
+	while (nodeval)
 	{
-		p = starts_with(node->str, var);
-		if (p && *p == '=')
+		ppr = startsWith(node->str, varr);
+		if (ppr && *ppr == '=')
 		{
-			info->env_changed = delete_node_at_index(&(info->env), i);
-			i = 0;
-			node = info->env;
+			infoval->env_changed = del_node_at_index(&(infoval->env), idx);
+			idx = 0;
+			nodeval = infoval->env;
 			continue;
 		}
-		node = node->next;
-		i++;
+		nodeval = nodeval->next;
+		idx++;
 	}
-	return (info->env_changed);
+	return (infoval->env_changed);
 }
 
 /**
- * _setenv - Initialize a new environment variable,
- *             or modify an existing one
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- * @var: the string env var property
- * @value: the string env var value
+ * set_shell_env - Initialize a new environment var,
+ * or change an existing one
+ * @infoval: struct involving arguments. Used to maintain
+ * constant function prototype.
+ * @varprop: the string env var property
+ * @varval: the string env var value
  *  Return: Always 0
  */
-int _setenv(info_t *info, char *var, char *value)
+int set_shell_env(info_type *infoval, char *varprop, char *varval)
 {
-	char *buf = NULL;
-	list_t *node;
-	char *p;
+	char *buffered = NULL;
+	list_t *nodeval;
+	char *ppr;
 
-	if (!var || !value)
+	if (!varprop || !varval)
 		return (0);
 
-	buf = malloc(_strlen(var) + _strlen(value) + 2);
-	if (!buf)
+	buffered = malloc(_strlen(var) + _strlen(varval) + 2);
+	if (!buffered)
 		return (1);
-	_strcpy(buf, var);
-	_strcat(buf, "=");
-	_strcat(buf, value);
-	node = info->env;
-	while (node)
+	string_copy(buffered, varprop);
+	string_cat(buffered, "=");
+	string_cat(buffered, varval);
+	node = infoval->env;
+	while (nodeval)
 	{
-		p = starts_with(node->str, var);
+		p = startsWith(nodeval->str, varprop);
 		if (p && *p == '=')
 		{
-			free(node->str);
-			node->str = buf;
-			info->env_changed = 1;
+			free(nodeval->str);
+			nodeval->str = buffered;
+			infoval->env_changed = 1;
 			return (0);
 		}
-		node = node->next;
+		nodeval = nodeval->next;
 	}
-	add_node_end(&(info->env), buf, 0);
-	free(buf);
-	info->env_changed = 1;
+	add_node_at_end(&(infoval->env), buffered, 0);
+	free(buffered);
+	infoval->env_changed = 1;
 	return (0);
 }
 
