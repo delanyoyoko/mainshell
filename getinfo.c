@@ -1,74 +1,74 @@
 #include "shell.h"
 
 /**
- * clear_info - initializes info_t struct
- * @info: struct address
+ * clear_info - init info_type struct
+ * @infoval: infoval struct address
  */
-void clear_info(info_t *info)
+void clear_info(info_type *infoval)
 {
-	info->arg = NULL;
-	info->argv = NULL;
-	info->path = NULL;
-	info->argc = 0;
+	infoval->arg = NULL;
+	infoval->argv = NULL;
+	infoval->path = NULL;
+	infoval->argc = 0;
 }
 
 /**
- * set_info - initializes info_t struct
- * @info: struct address
- * @av: argument vector
+ * set_info - init info_type struct
+ * @infoval: infoval struct address
+ * @arg_vec: argument vector
  */
-void set_info(info_t *info, char **av)
+void set_info(info_type *infoval, char **arg_vec)
 {
-	int i = 0;
+	int idx = 0;
 
-	info->fname = av[0];
-	if (info->arg)
+	infoval->fname = arg_vec[0];
+	if (infoval->arg)
 	{
-		info->argv = strtow(info->arg, " \t");
-		if (!info->argv)
+		infoval->argv = tokenize_string(infoval->arg, " \t");
+		if (!infoval->argv)
 		{
-			info->argv = malloc(sizeof(char *) * 2);
-			if (info->argv)
+			infoval->argv = malloc(sizeof(char *) * 2);
+			if (infoval->argv)
 			{
-				info->argv[0] = _strdup(info->arg);
-				info->argv[1] = NULL;
+				infoval->argv[0] = dup_string(infoval->arg);
+				infoval->argv[1] = NULL;
 			}
 		}
-		for (i = 0; info->argv && info->argv[i]; i++)
+		for (idx = 0; infoval->argv && infoval->argv[idx]; idx++)
 			;
-		info->argc = i;
+		infoval->argc = idx;
 
-		replace_alias(info);
-		replace_vars(info);
+		change_alias(infoval);
+		change_vars(infoval);
 	}
 }
 
 /**
- * free_info - frees info_t struct fields
- * @info: struct address
- * @all: true if freeing all fields
+ * free_info - frees info_type struct fields
+ * @infoval: infoval struct address
+ * @all_fields: sets true if freeing all_fields fields
  */
-void free_info(info_t *info, int all)
+void free_info(info_type *infoval, int all_fields)
 {
-	ffree(info->argv);
-	info->argv = NULL;
-	info->path = NULL;
-	if (all)
+	ffree(infoval->argv);
+	infoval->argv = NULL;
+	infoval->path = NULL;
+	if (all_fields)
 	{
-		if (!info->cmd_buf)
-			free(info->arg);
-		if (info->env)
-			free_list(&(info->env));
-		if (info->history)
-			free_list(&(info->history));
-		if (info->alias)
-			free_list(&(info->alias));
-		ffree(info->environ);
-			info->environ = NULL;
-		bfree((void **)info->cmd_buf);
-		if (info->readfd > 2)
-			close(info->readfd);
-		_putchar(BUF_FLUSH);
+		if (!infoval->cmd_buf)
+			free(infoval->arg);
+		if (infoval->env)
+			free_list(&(infoval->env));
+		if (infoval->history)
+			free_list(&(infoval->history));
+		if (infoval->alias)
+			free_list(&(infoval->alias));
+		ffree(infoval->environ);
+			infoval->environ = NULL;
+		bfree((void **)infoval->cmd_buf);
+		if (infoval->readfd > 2)
+			close(infoval->readfd);
+		_putchar(BUFFER_FLUSH);
 	}
 }
 
