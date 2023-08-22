@@ -123,7 +123,7 @@ char *duplicate_chars(char *, int, int);
 char *find_path(info_type *, char *, char *);
 
 /* loophsh.c */
-int loop_hash(char **);
+/* int loop_hash(char **); */
 
 /* in the _errors.c */
 void puts_error(char *);
@@ -139,7 +139,7 @@ char *string_cat(char *, char *);
 
 /* in the _string1.c file*/
 char *string_copy(char *, char *);
-char *duplicate_string(const char *);
+char *dup_string(const char *);
 void _puts(char *);
 int _putchar(char);
 
@@ -150,7 +150,7 @@ char *char_string(char *, char);
 
 /* in the _tokenizer.c */
 char **tokenize_string(char *, char *);
-char **strtow2(char *, char);
+char **tokenize_string2(char *, char);
 
 /* in the _realloc.c file*/
 char *set_mem(char *, char, unsigned int);
@@ -185,7 +185,7 @@ int shell_alias(info_type *);
 /*in the _getline.c */
 ssize_t accept_input(info_type *);
 int get_line(info_type *, char **, size_t *);
-void handle_sigint(int);
+void handleSigint(int);
 
 /* in the _getinfo.c */
 void clear_info(info_type *);

@@ -33,7 +33,8 @@ int unset_alias(info_type *infoval, char *strng)
 	cter = *ppr;
 	*ppr = 0;
 	retll = del_node_at_index(&(infoval->alias),
-		get_nodeIndex(infoval->alias, node_startsWith(infoval->alias, strng, -1)));
+		get_nodeIndex(infoval->alias,
+		node_startsWith(infoval->alias, strng, -1)));
 	*ppr = cter;
 	return (retll);
 }
@@ -57,7 +58,7 @@ int set_alias(info_type *infoval, char *strng)
 		return (unset_alias(infoval, strng));
 
 	unset_alias(infoval, strng);
-	return (add_node_at_end(&(infoval->alias), strng, 0) == NULL);
+	return (prepend_node(&(infoval->alias), strng, 0) == NULL);
 }
 
 /**
@@ -112,7 +113,8 @@ int shell_alias(info_type *infoval)
 		if (ppr)
 			set_alias(infoval, infoval->argv[idx]);
 		else
-			print_alias(node_startsWith(infoval->alias, infoval->argv[idx], '='));
+			print_alias(node_startsWith(infoval->alias,
+				infoval->argv[idx], '='));
 	}
 
 	return (0);

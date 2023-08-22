@@ -16,7 +16,8 @@ char *load_history_file(info_type *infoval)
 	dirr = get_env(infoval, "HOME=");
 	if (!dirr)
 		return (NULL);
-	buffered = malloc(sizeof(char) * (string_len(dirr) + _strlen(HISTORY_FILE) + 2));
+	buffered = malloc(sizeof(char) * (string_len(dirr) +
+		string_len(HISTORY_FILE) + 2));
 	if (!buffered)
 		return (NULL);
 	buffered[0] = 0;
@@ -27,7 +28,8 @@ char *load_history_file(info_type *infoval)
 }
 
 /**
- * compose_history - creates a history file, or appends to an existing file
+ * compose_history - creates a history file, or appends 
+ * to an existing file
  * @infoval: struct involving arguments. Used to maintain
  * constant function prototype.
  *
@@ -46,7 +48,8 @@ int compose_history(info_type *infoval)
 	free(filename);
 	if (file_dec == -1)
 		return (-1);
-	for (nodeval = infoval->history; nodeval; nodeval = nodeval->next)
+	for (nodeval = infoval->history; nodeval;
+		nodeval = nodeval->next)
 	{
 		put_files_dec(nodeval->str, file_dec);
 		put_file_dec('\n', file_dec);
@@ -93,11 +96,13 @@ int reader_history(info_type *infoval)
 		if (buffered[idx] == '\n')
 		{
 			buffered[idx] = 0;
-			compose_history_list(infoval, buffered + last_count, line_count++);
+			compose_history_list(infoval, buffered +
+				last_count, line_count++);
 			last_count = idx + 1;
 		}
 	if (last_count != idx)
-		compose_history_list(infoval, buffered + last_count, line_count++);
+		compose_history_list(infoval, buffered +
+			last_count, line_count++);
 	free(buffered);
 	infoval->histcount = line_count;
 	while (infoval->histcount-- >= HISTORY_MAX)
@@ -107,7 +112,8 @@ int reader_history(info_type *infoval)
 }
 
 /**
- * compose_history_list - adds an entry to a history linked list
+ * compose_history_list - adds an entry to a history 
+ * linked list
  * @infoval: struct involving arguments. Used to maintain
  * constant function prototype.
  * @buffered: a buffer
@@ -115,13 +121,14 @@ int reader_history(info_type *infoval)
  *
  * Return: Always 0
  */
-int compose_history_list(info_type *infoval, char *buffered, int line_count)
+int compose_history_list(info_type *infoval,
+char *buffered, int line_count)
 {
 	list_type *nodeval = NULL;
 
 	if (infoval->history)
 		nodeval = infoval->history;
-	add_node_at_end(&nodeval, buffered, line_count);
+	prepend_node(&nodeval, buffered, line_count);
 
 	if (!infoval->history)
 		infoval->history = nodeval;
