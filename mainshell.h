@@ -123,7 +123,7 @@ char *duplicate_chars(char *, int, int);
 char *find_path(info_type *, char *, char *);
 
 /* loophsh.c */
-int loop_hash(char **);
+/* int loop_hash(char **); */
 
 /* in the _errors.c */
 void puts_error(char *);
