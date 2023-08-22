@@ -139,7 +139,7 @@ char *string_cat(char *, char *);
 
 /* in the _string1.c file*/
 char *string_copy(char *, char *);
-char *duplicate_string(const char *);
+char *dup_string(const char *);
 void _puts(char *);
 int _putchar(char);
 
