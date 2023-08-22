@@ -26,7 +26,7 @@ char **get_shell_env(info_type *infoval)
  */
 int unset_shell_env(info_type *infoval, char *varr)
 {
-	list_t *nodeval = infoval->env;
+	list_type *nodeval = infoval->env;
 	size_t idx = 0;
 	char *ppr;
 
@@ -35,7 +35,7 @@ int unset_shell_env(info_type *infoval, char *varr)
 
 	while (nodeval)
 	{
-		ppr = startsWith(node->str, varr);
+		ppr = startsWith(nodeval->str, varr);
 		if (ppr && *ppr == '=')
 		{
 			infoval->env_changed = del_node_at_index(&(infoval->env), idx);
@@ -54,30 +54,32 @@ int unset_shell_env(info_type *infoval, char *varr)
  * or change an existing one
  * @infoval: struct involving arguments. Used to maintain
  * constant function prototype.
- * @varprop: the string env var property
+ * @varr: the string env var property
  * @varval: the string env var value
  *  Return: Always 0
  */
-int set_shell_env(info_type *infoval, char *varprop, char *varval)
+int set_shell_env(info_type *infoval,
+char *varr, char *varval)
 {
 	char *buffered = NULL;
-	list_t *nodeval;
+	list_type *nodeval;
 	char *ppr;
 
-	if (!varprop || !varval)
+	if (!varr || !varval)
 		return (0);
 
-	buffered = malloc(_strlen(var) + _strlen(varval) + 2);
+	buffered = malloc(string_len(varr) +
+		string_len(varval) + 2);
 	if (!buffered)
 		return (1);
-	string_copy(buffered, varprop);
+	string_copy(buffered, varr);
 	string_cat(buffered, "=");
 	string_cat(buffered, varval);
-	node = infoval->env;
+	nodeval = infoval->env;
 	while (nodeval)
 	{
-		p = startsWith(nodeval->str, varprop);
-		if (p && *p == '=')
+		ppr = startsWith(nodeval->str, varr);
+		if (ppr && *ppr == '=')
 		{
 			free(nodeval->str);
 			nodeval->str = buffered;
@@ -86,7 +88,7 @@ int set_shell_env(info_type *infoval, char *varprop, char *varval)
 		}
 		nodeval = nodeval->next;
 	}
-	add_node_at_end(&(infoval->env), buffered, 0);
+	append_node(&(infoval->env), buffered, 0);
 	free(buffered);
 	infoval->env_changed = 1;
 	return (0);
