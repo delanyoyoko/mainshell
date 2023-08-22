@@ -57,7 +57,7 @@ int set_alias(info_type *infoval, char *strng)
 		return (unset_alias(infoval, strng));
 
 	unset_alias(infoval, strng);
-	return (add_node_at_end(&(infoval->alias), strng, 0) == NULL);
+	return (prepend_node(&(infoval->alias), strng, 0) == NULL);
 }
 
 /**
