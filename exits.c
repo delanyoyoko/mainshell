@@ -35,10 +35,10 @@ char *copy_string(char *des, char *source, int num)
  **cat_string - to concatenates two strings
  *@_first: the first string
  *@_second: the second string
- *@nun: the amount of bytes to be max used
+ *@num: the amount of bytes to be max used
  *Return: the combined concatenated string
  */
-char *cat_string(char *_first, char *_second, int n)
+char *cat_string(char *_first, char *_second, int num)
 {
 	int idx;
 	int jdx;
@@ -48,13 +48,13 @@ char *cat_string(char *_first, char *_second, int n)
 	jdx = 0;
 	while (_first[idx] != '\0')
 		idx++;
-	while (_second[jdx] != '\0' && jdx < n)
+	while (_second[jdx] != '\0' && jdx < num)
 	{
 		_first[idx] = _second[jdx];
 		idx++;
 		jdx++;
 	}
-	if (jdx < n)
+	if (jdx < num)
 		_first[idx] = '\0';
 	return (strng);
 }
