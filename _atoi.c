@@ -13,7 +13,7 @@ int get_interactive(info_type *infoval)
 
 /**
  * is_delimitor - checks whether character is a delimitor
- * @c: the character to check
+ * @cter: the character to check
  * @delimitor: the delimitor string
  * Return: 0 if not a delimitor, otherwise 1 for true
  */
