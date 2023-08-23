@@ -67,7 +67,7 @@ ssize_t accept_input(info_type *infoval)
 		jdx = idx;
 		ppr = buffered + idx;
 
-		check_chain(infoval, buffered, &jdx, idx, lenval);
+		look_chain(infoval, buffered, &jdx, idx, lenval);
 		while (jdx < lenval)
 		{
 			if (isChain(infoval, buffered, &jdx))
