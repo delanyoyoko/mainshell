@@ -49,8 +49,7 @@ int shell_cd(info_type *infoval)
 	{
 		fold = get_env(infoval, "HOME=");
 		if (!fold)
-			ch_dir_ret = 
-				chdir((fold = get_env(infoval, "PWD=")) ? fold : "/");
+			ch_dir_ret = chdir((fold = get_env(infoval, "PWD=")) ? fold : "/");
 		else
 			ch_dir_ret = chdir(fold);
 	}
@@ -63,8 +62,7 @@ int shell_cd(info_type *infoval)
 			return (1);
 		}
 		_puts(get_env(infoval, "OLDPWD=")), _putchar('\n');
-		ch_dir_ret = 
-			chdir((fold = get_env(infoval, "OLDPWD=")) ? fold : "/");
+		ch_dir_ret = chdir((fold = get_env(infoval, "OLDPWD=")) ? fold : "/");
 	}
 	else
 		ch_dir_ret = chdir(infoval->argv[1]);
