@@ -32,8 +32,8 @@ ssize_t input_buffered(info_type *infoval, char **buffered, size_t *len)
 				bytreads--;
 			}
 			infoval->linecount_flag = 1;
-			remove_comments(*buffered);
-			build_history_list(infoval, *buffered, infoval->histcount++);
+			strip_comments(*buffered);
+			compose_history_list(infoval, *buffered, infoval->histcount++);
 			{
 				*len = bytreads;
 				infoval->cmd_buf = buffered;
