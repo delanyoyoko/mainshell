@@ -28,7 +28,7 @@ char *load_history_file(info_type *infoval)
 }
 
 /**
- * compose_history - creates a history file, or appends 
+ * compose_history - creates a history file, or appends
  * to an existing file
  * @infoval: struct involving arguments. Used to maintain
  * constant function prototype.
@@ -72,10 +72,8 @@ int reader_history(info_type *infoval)
 	ssize_t file_dec, read_len, file_size = 0;
 	struct stat _stat;
 	char *buffered = NULL, *filename = load_history_file(infoval);
-
 	if (!filename)
 		return (0);
-
 	file_dec = open(filename, O_RDONLY);
 	free(filename);
 	if (file_dec == -1)
@@ -112,7 +110,7 @@ int reader_history(info_type *infoval)
 }
 
 /**
- * compose_history_list - adds an entry to a history 
+ * compose_history_list - adds an entry to a history
  * linked list
  * @infoval: struct involving arguments. Used to maintain
  * constant function prototype.
