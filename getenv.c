@@ -35,7 +35,7 @@ int unset_shell_env(info_type *infoval, char *varr)
 
 	while (nodeval)
 	{
-		ppr = startsWith(nodeval->str, varr);
+		ppr = starts_with‎(nodeval->str, varr);
 		if (ppr && *ppr == '=')
 		{
 			infoval->env_changed = del_node_at_index(&(infoval->env), idx);
@@ -78,7 +78,7 @@ char *varr, char *varval)
 	nodeval = infoval->env;
 	while (nodeval)
 	{
-		ppr = startsWith(nodeval->str, varr);
+		ppr = starts_with‎(nodeval->str, varr);
 		if (ppr && *ppr == '=')
 		{
 			free(nodeval->str);
