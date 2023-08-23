@@ -11,7 +11,7 @@ char *set_mem(char *area, char membyte, unsigned int num)
 {
 	unsigned int idx;
 
-	for (idx= 0; idx < num; idx++)
+	for (idx = 0; idx < num; idx++)
 		area[idx] = membyte;
 	return (area);
 }
