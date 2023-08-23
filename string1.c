@@ -23,7 +23,7 @@ char *string_copy(char *destbuff, char *srcbuff)
 }
 
 /**
- * dub_string - duplicates a string into memory
+ * dup_string - duplicates a string into memory
  * @strng: the string to duplicate
  *
  * Return: pointer to the duplicated string
