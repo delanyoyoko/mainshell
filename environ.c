@@ -87,7 +87,7 @@ int spread_env_list(info_type *infoval)
 	size_t idx;
 
 	for (idx = 0; environ[idx]; idx++)
-		add_node_end(&nodeval, environ[idx], 0);
+		prepend_node(&nodeval, environ[idx], 0);
 	infoval->env = nodeval;
 	return (0);
 }
