@@ -12,7 +12,7 @@ int atoi_error(char *strng)
 	unsigned long int res = 0;
 
 	if (*strng == '+')
-		strng++; 
+		strng++;
 	for (idx = 0;  strng[idx] != '\0'; idx++)
 	{
 		if (strng[idx] >= '0' && strng[idx] <= '9')
@@ -109,7 +109,8 @@ char *convert_num(long int num, int base_val, int arg_flags)
 		sign_val = '-';
 
 	}
-	list_val = arg_flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
+	list_val = arg_flags & CONVERT_LOWERCASE ? "0123456789abcdef" :
+		"0123456789ABCDEF";
 	ptr_val = &buffered[49];
 	*ptr_val = '\0';
 
