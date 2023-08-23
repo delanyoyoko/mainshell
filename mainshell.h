@@ -212,8 +212,8 @@ int compose_history_list(info_type *info, char *buf, int linecount);
 int nominate_history(info_type *info);
 
 /* in the _lists.c */
-list_type *add_node_at_index(list_type **, const char *, int);
-list_type *add_node_at_end(list_type **, const char *, int);
+list_type *append_node(list_type **, const char *, int);
+list_type *prepend_node(list_type **, const char *, int);
 size_t print_list_string(const list_type *);
 int del_node_at_index(list_type **, unsigned int);
 void free_mem_list(list_type **);
