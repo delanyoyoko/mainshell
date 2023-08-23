@@ -18,7 +18,7 @@ char **tokenize_string(char *strng, char *delim)
 	if (!delim)
 		delim = " ";
 	for (idx = 0; strng[idx] != '\0'; idx++)
-		if (!is_delimitor(strng[idx], delim) && 
+		if (!is_delimitor(strng[idx], delim) &&
 			(is_delimitor(strng[idx + 1], delim) || !strng[idx + 1]))
 			numWords++;
 
