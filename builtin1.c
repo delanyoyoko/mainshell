@@ -27,7 +27,7 @@ int unset_alias(info_type *infoval, char *strng)
 	char cter;
 	int retll;
 
-	ppr = _strchr(strng, '=');
+	ppr = char_string(strng, '=');
 	if (!ppr)
 		return (1);
 	cter = *ppr;
@@ -51,7 +51,7 @@ int set_alias(info_type *infoval, char *strng)
 {
 	char *ppr;
 
-	ppr = _strchr(strng, '=');
+	ppr = char_string(strng, '=');
 	if (!ppr)
 		return (1);
 	if (!*++ppr)
@@ -74,7 +74,7 @@ int print_alias(list_type *nodeval)
 
 	if (nodeval)
 	{
-		ppr = _strchr(nodeval->str, '=');
+		ppr = char_string(nodeval->str, '=');
 		for (anod = nodeval->str; anod <= ppr; anod++)
 		_putchar(*anod);
 		_putchar('\'');
@@ -109,7 +109,7 @@ int shell_alias(info_type *infoval)
 	}
 	for (idx = 1; infoval->argv[idx]; idx++)
 	{
-		ppr = _strchr(infoval->argv[idx], '=');
+		ppr = char_string(infoval->argv[idx], '=');
 		if (ppr)
 			set_alias(infoval, infoval->argv[idx]);
 		else
