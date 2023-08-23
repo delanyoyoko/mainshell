@@ -48,9 +48,9 @@ int make_hash(info_type *infoval, char **argvec)
  * @infoval: the parameter & return infoval struct
  *
  * Return: -1 if builtin not found,
- * 	0 if builtin executed successfully,
- * 	1 if builtin found but not successful,
- * 	2 if builtin signals exit()
+ * 0 if builtin executed successfully,
+ * 1 if builtin found but not successful,
+ * 2 if builtin signals exit()
  */
 int find_builtin(info_type *infoval)
 {
